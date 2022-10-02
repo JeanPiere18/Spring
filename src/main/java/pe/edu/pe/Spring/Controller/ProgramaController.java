@@ -5,6 +5,7 @@
 package pe.edu.pe.Spring.Controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,26 +33,31 @@ public class ProgramaController {
     @Autowired
     ProgramaService programaService;
 
+        @ApiOperation(value = "Lista de programas")
     @GetMapping("/all")
     public List<Programa> findAll() {
         return programaService.findAll();
     }
-
+    @ApiOperation(value = "Obtiene datos de un programa")
     @GetMapping("/{id}")
     public ResponseEntity<Programa> findById(@PathVariable Long id) {
         Programa programa = programaService.findById(id);
         return ResponseEntity.ok(programa);
     }
 
+        @ApiOperation(value = "Elimina un programa")
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         programaService.deleteById(id);
     }
 
+        @ApiOperation(value = "Crea un programa")
     @PostMapping("/save")
     public Programa save(@RequestBody Programa programa) {
         return programaService.save(programa);
     }
+    
+    @ApiOperation(value = "Modifica datos de un programa")
 
     @PutMapping("/update")
     public Programa update(@RequestBody Programa programa) {
